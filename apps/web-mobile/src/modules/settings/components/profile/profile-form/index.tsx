@@ -51,7 +51,6 @@ const cssmap: cssmapType = {
 export default function ProfileForm() {
   const { user } = useAuth();
   const [turnstileToken, setTurnstileToken] = useState<string>();
-  const [radioActive, setRadioActive] = useState<string>();
 
   const form = useForm<ProfileFormValues>({
     // defaultValues,
@@ -60,6 +59,7 @@ export default function ProfileForm() {
   });
 
   function onSubmit(data: ProfileFormValues) {
+    console.log({ data });
     toast({
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
@@ -161,21 +161,12 @@ export default function ProfileForm() {
           <Separator />
         </div>
 
-        <RadioGroup
-          defaultValue="option-one"
-          className={`grid grid-cols-6 [&[data-active='${cssmap[radioActive]}']>#${cssmap[radioActive]}]:border-blue-500 max-md:grid-cols-2 [&[data-active='${cssmap[radioActive]}']>#${cssmap[radioActive]}>.checked-box-symbol]:block`}
-          data-active={radioActive}
-        >
-          <RadioBox beforeText="I'M" id="option-hodler" name="Partner" activeState={setRadioActive} />
+        <RadioGroup defaultValue="option-one" className={`grid grid-cols-6`}>
+          <RadioBox beforeText="I'M" id="option-hodler" name="Partner" />
 
-          <RadioBox
-            beforeText="I'M"
-            id="option-recycler"
-            name="Sustainble treatment agent"
-            activeState={setRadioActive}
-          />
+          <RadioBox beforeText="I'M" id="option-recycler" name="Sustainable treatment agent" />
 
-          <RadioBox beforeText="I'M" id="option-waste" name="Waste Generator" activeState={setRadioActive} />
+          <RadioBox beforeText="I'M" id="option-waste" name="Waste Generator" />
         </RadioGroup>
 
         {/* <Turnstile siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY} onSuccess={setTurnstileToken} /> */}
