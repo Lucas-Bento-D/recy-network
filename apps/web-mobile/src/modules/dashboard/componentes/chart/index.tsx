@@ -1,7 +1,6 @@
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { ChartContainer } from '@/components/ui/chart';
 
-import { Pie, Cell, Legend, PieChart, LabelProps } from 'recharts';
+import { Pie, Cell, Legend, PieChart, LabelProps, ResponsiveContainer } from 'recharts';
 import { chartConfig } from './constants';
 import { DashboardChartProps, ChartConfigType } from './types';
 
@@ -35,7 +34,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 export const DashboardChart = ({ data }: DashboardChartProps) => {
   const chartData =
-    data.materials &&
+    data?.materials &&
     Object.entries(data.materials).map(([residue, total]) => ({
       residue,
       total,
@@ -52,8 +51,8 @@ export const DashboardChart = ({ data }: DashboardChartProps) => {
             {data?.materials && Object.keys(data.materials).length === 0 ? 'There is no data to display' : null}
 
             {data?.materials && Object.keys(data.materials).length > 0 && (
-              <ChartContainer config={chartConfig} className="vh-80 w-full">
-                <PieChart height={300}>
+              <ResponsiveContainer width="100%" height={450}>
+                <PieChart>
                   <Pie
                     data={chartData}
                     dataKey="total"
@@ -67,14 +66,14 @@ export const DashboardChart = ({ data }: DashboardChartProps) => {
                     ))}
                   </Pie>
                   <Legend
-                    layout="vertical"
-                    align="right"
-                    verticalAlign="middle"
+                    layout="horizontal"
+                    verticalAlign="bottom"
+                    align="center"
                     iconType="circle"
                     formatter={(value) => <span className="text-xs font-medium sm:text-sm lg:text-lg">{value}</span>}
                   />
                 </PieChart>
-              </ChartContainer>
+              </ResponsiveContainer>
             )}
           </CardContent>
         </Card>

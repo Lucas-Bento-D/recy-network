@@ -13,7 +13,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ROUTES } from '@/config/routes';
-import { cn } from '@/utils/cn';
 
 interface ProfileMenuProps {
   user: {

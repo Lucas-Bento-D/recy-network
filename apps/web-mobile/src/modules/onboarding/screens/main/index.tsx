@@ -2,12 +2,13 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { useState } from 'react';
 import OnboardingForm from '../../components/form';
 import { useAuth } from '@/hooks/auth';
+
 export default function OnboardingScreen() {
   const { user, hasNewUserRole, hasAdminPrivileges } = useAuth();
 
   const showOnboardingModal = !hasNewUserRole || hasAdminPrivileges;
 
-  const [isOnboardingOpen, setIsOnboardingOpen] = useState(showOnboardingModal);
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(true);
 
   if (showOnboardingModal) return null;
 
@@ -23,7 +24,7 @@ export default function OnboardingScreen() {
         }}
       >
         <DialogTitle className="sr-only">Onboarding</DialogTitle>
-        {<OnboardingForm userId={user.id} onClose={() => setIsOnboardingOpen(false)} />}
+        {<OnboardingForm userId={user?.id} onClose={() => setIsOnboardingOpen(false)} />}
       </DialogContent>
     </Dialog>
   );
