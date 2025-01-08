@@ -42,8 +42,6 @@ export function Menu() {
         const isAuditsRoute = item.route === ROUTES.PRIVATE.AUDITS();
         const isUnauthorized = !hasAuditorRole && !hasAdminPrivileges;
 
-        console.log('user', user);
-
         if (isAuditsRoute && isUnauthorized) return null;
 
         return (

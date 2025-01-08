@@ -34,6 +34,7 @@ const profileFormSchema = z.object({
     .max(30, {
       message: 'Username must not be longer than 30 characters.',
     }),
+  role: z.string().min(1, 'You must select a role to display.'),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -58,7 +59,7 @@ export default function ProfileForm() {
     resolver: zodResolver(profileFormSchema),
   });
 
-  function onSubmit(data: ProfileFormValues) {
+  function onSubmit(data: any) {
     console.log({ data });
     toast({
       description: (
@@ -160,14 +161,25 @@ export default function ProfileForm() {
           <h2 className="text-base font-bold uppercase">Profile Type:</h2>
           <Separator />
         </div>
+        <FormField
+          control={form.control}
+          name="role"
+          render={({ field }) => (
+            <FormControl>
+              <RadioGroup
+                onValueChange={field.onChange}
+                defaultValue={field.value || ''}
+                className={`grid grid-cols-6`}
+              >
+                <RadioBox beforeText="I'M" id="partner" name="Partner" />
 
-        <RadioGroup defaultValue="option-one" className={`grid grid-cols-6`}>
-          <RadioBox beforeText="I'M" id="option-hodler" name="Partner" />
+                <RadioBox beforeText="I'M" id="recycler" name="Sustainable treatment agent" />
 
-          <RadioBox beforeText="I'M" id="option-recycler" name="Sustainable treatment agent" />
-
-          <RadioBox beforeText="I'M" id="option-waste" name="Waste Generator" />
-        </RadioGroup>
+                <RadioBox beforeText="I'M" id="waste-generator" name="Waste Generator" />
+              </RadioGroup>
+            </FormControl>
+          )}
+        />
 
         {/* <Turnstile siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY} onSuccess={setTurnstileToken} /> */}
         <Button type="submit">Save Changes</Button>
