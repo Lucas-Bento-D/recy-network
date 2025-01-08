@@ -24,7 +24,7 @@ export default function OnboardingScreen() {
         }}
       >
         <DialogTitle className="sr-only">Onboarding</DialogTitle>
-        {<OnboardingForm userId={user.id} onClose={() => setIsOnboardingOpen(false)} />}
+        {<OnboardingForm userId={user?.id} onClose={() => setIsOnboardingOpen(false)} />}
       </DialogContent>
     </Dialog>
   );

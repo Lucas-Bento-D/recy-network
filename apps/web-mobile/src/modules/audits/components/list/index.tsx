@@ -38,7 +38,7 @@ export const AuditsList = ({ data, isFetching }: DashboardAuditsProps) => {
     setSelectedSubmittedReportId(findedAudit.reportId);
   };
 
-  const handleAudit = (comments: string, auditedStatus: keyof typeof AuditStatusConstants) => {
+  const handleAudit = async (comments: string, auditedStatus: keyof typeof AuditStatusConstants) => {
     if (!selectedAudit) return;
 
     const updatedAudit: UpdateAudit = {

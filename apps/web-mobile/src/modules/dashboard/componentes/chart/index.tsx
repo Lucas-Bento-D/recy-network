@@ -1,5 +1,4 @@
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { ChartContainer } from '@/components/ui/chart';
 
 import { Pie, Cell, Legend, PieChart, LabelProps, ResponsiveContainer } from 'recharts';
 import { chartConfig } from './constants';
